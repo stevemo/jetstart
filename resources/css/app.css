@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+    @apply max-w-screen-2xl mx-auto sm:px-6 lg:px-8;
+}
+
+.container-fluid {
+    @apply mx-auto sm:px-2 lg:px-0;
+}
+
+.table-th-first {
+    @apply py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6;
+}
+
+.table-th {
+    @apply px-3 py-3.5 text-left text-sm font-semibold text-gray-900;
+}
+
+.table-td-first {
+    @apply py-4 pl-4 pr-3 text-sm whitespace-nowrap sm:pl-6;
+}
+
+.table-td {
+    @apply whitespace-nowrap px-3 py-4 text-sm;
+}
+
+label.required:after
+{
+    @apply text-yellow-600;
+    content: " *";
+}

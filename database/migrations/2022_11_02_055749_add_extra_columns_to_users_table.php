@@ -16,6 +16,7 @@ return new class() extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('admin')->after('email')->default(false);
             $table->json('abilities')->after('admin');
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,7 @@ return new class() extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['admin', 'abilities']);
+            $table->dropSoftDeletes();
         });
     }
 };

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Cpanel\Users\UserList;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+});
+
+// Control Panel Routes
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->prefix('cpanel')->name('cpanel.')->group(function () {
+    Route::get('/users', UserList::class)->name('users.index');
 });
