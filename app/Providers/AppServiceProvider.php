@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Livewire\Component;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Todo: fix failing jetstream test before enabling
+        // Model::shouldBeStrict(! $this->app->isProduction());
+
+        Component::macro('notify', function ($message) {
+            $this->dispatchBrowserEvent('notify', $message);
+        });
     }
 }

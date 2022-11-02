@@ -72,15 +72,13 @@
                                             <div class="flex space-x-2">
                                                 @if(! $user->trashed())
                                                     @can('delete', $user)
-                                                        @if ($user->id !== auth()->id())
-                                                            <button
-                                                                x-data
-                                                                x-tooltip="Delete"
-                                                                wire:click="delete({{ $user->id }})"
-                                                                type="button">
-                                                                <x-svg.trash class="w-6 h-6 text-red-500 hover:text-red-700" />
-                                                            </button>
-                                                        @endif
+                                                        <button
+                                                            x-data
+                                                            x-tooltip="Delete"
+                                                            wire:click="delete({{ $user->id }})"
+                                                            type="button">
+                                                            <x-svg.trash class="w-6 h-6 text-red-500 hover:text-red-700" />
+                                                        </button>
                                                     @endcan
                                                 @else
                                                     @can('restore', $user)
@@ -115,4 +113,25 @@
             </x-card>
         </div>
     </div>
+
+    <!-- Delete User Confirmation Modal -->
+    <x-jet-dialog-modal wire:model="showDeleteModal">
+        <x-slot name="title">
+            Suspend Account
+        </x-slot>
+
+        <x-slot name="content">
+            Are you sure you want to suspend this account?
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('showDeleteModal')" wire:loading.attr="disabled">
+                {{ __('Nevermind') }}
+            </x-jet-secondary-button>
+
+            <x-danger-button class="ml-2" wire:click="destroy" wire:loading.attr="disabled">
+                Suspend Account
+            </x-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

@@ -64,7 +64,11 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        if ($user->ableTo('user:delete') && $user->isNot($model)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
