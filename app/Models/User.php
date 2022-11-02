@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -27,6 +26,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'admin',
+        'abilities',
     ];
 
     /**
@@ -48,6 +49,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'admin'             => 'boolean',
+        'abilities'         => 'collection',
     ];
 
     /**
@@ -58,4 +61,29 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Determine id the user is an administrator
+     *
+     * @return bool
+     *
+     * @author Steve Montambeault <steve@stevemo.ca>
+     */
+    public function isAdmin(): bool
+    {
+        return $this->admin;
+    }
+
+    /**
+     * Determine if the user has a given ability
+     *
+     * @param  string  $ability
+     * @return bool
+     *
+     * @author Steve Montambeault <steve@stevemo.ca>
+     */
+    public function ableTo(string $ability): bool
+    {
+        return $this->abilities->contains($ability);
+    }
 }
