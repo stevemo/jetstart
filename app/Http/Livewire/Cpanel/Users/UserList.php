@@ -12,9 +12,10 @@ class UserList extends Component
     use AuthorizesRequests;
     use WithPagination;
 
-    public $showDeleteModal = false;
-
-    public $userId;
+    protected $listeners = [
+        'user:deleted'  => 'listenerResponse',
+        'user:restored' => 'listenerResponse',
+    ];
 
     public function mount()
     {
@@ -26,24 +27,8 @@ class UserList extends Component
         return User::withTrashed()->paginate();
     }
 
-    public function delete(User $user)
+    protected function listenerResponse($message)
     {
-        $this->authorize('delete', $user);
-
-        $this->userId = $user->id;
-        $this->showDeleteModal = true;
-    }
-
-    public function destroy()
-    {
-        $user = User::findOrFail($this->userId);
-
-        $this->authorize('delete', $user);
-
-        $user->delete();
-
-        $this->showDeleteModal = false;
-        $this->userId = null;
-        $this->notify('User Suspended!');
+        $this->notify($message);
     }
 }
