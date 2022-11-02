@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Jetstream;
 
+use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
-use Livewire\Livewire;
-use Tests\TestCase;
 
 class DeleteApiTokenTest extends TestCase
 {
@@ -23,8 +23,8 @@ class DeleteApiTokenTest extends TestCase
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $token = $user->tokens()->create([
-            'name' => 'Test Token',
-            'token' => Str::random(40),
+            'name'      => 'Test Token',
+            'token'     => Str::random(40),
             'abilities' => ['create', 'read'],
         ]);
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Jetstream;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Jetstream\Features;
-use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
-use Livewire\Livewire;
 use Tests\TestCase;
+use App\Models\User;
+use Livewire\Livewire;
+use Laravel\Jetstream\Features;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 
 class CreateApiTokenTest extends TestCase
 {
@@ -23,7 +23,7 @@ class CreateApiTokenTest extends TestCase
 
         Livewire::test(ApiTokenManager::class)
                     ->set(['createApiTokenForm' => [
-                        'name' => 'Test Token',
+                        'name'        => 'Test Token',
                         'permissions' => [
                             'read',
                             'update',

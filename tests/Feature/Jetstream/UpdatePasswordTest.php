@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Jetstream;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
-use Livewire\Livewire;
 use Tests\TestCase;
+use App\Models\User;
+use Livewire\Livewire;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 
 class UpdatePasswordTest extends TestCase
 {
@@ -19,8 +19,8 @@ class UpdatePasswordTest extends TestCase
 
         Livewire::test(UpdatePasswordForm::class)
                 ->set('state', [
-                    'current_password' => 'password',
-                    'password' => 'new-password',
+                    'current_password'      => 'password',
+                    'password'              => 'new-password',
                     'password_confirmation' => 'new-password',
                 ])
                 ->call('updatePassword');
@@ -34,8 +34,8 @@ class UpdatePasswordTest extends TestCase
 
         Livewire::test(UpdatePasswordForm::class)
                 ->set('state', [
-                    'current_password' => 'wrong-password',
-                    'password' => 'new-password',
+                    'current_password'      => 'wrong-password',
+                    'password'              => 'new-password',
                     'password_confirmation' => 'new-password',
                 ])
                 ->call('updatePassword')
@@ -50,8 +50,8 @@ class UpdatePasswordTest extends TestCase
 
         Livewire::test(UpdatePasswordForm::class)
                 ->set('state', [
-                    'current_password' => 'password',
-                    'password' => 'new-password',
+                    'current_password'      => 'password',
+                    'password'              => 'new-password',
                     'password_confirmation' => 'wrong-password',
                 ])
                 ->call('updatePassword')
