@@ -15,10 +15,9 @@ return [
                 'title'     => 'Users',
                 'abilities' => [
                     'user.viewAny'      => 'View all users',
-                    'user.view'         => 'Show user',
                     'user.create'       => 'Create new user',
                     'user.update'       => 'Update user',
-                    'user.delete'       => 'Delete user',
+                    'user.delete'       => 'Suspend user',
                     'user.restore'      => 'Restore user',
                 ],
             ],

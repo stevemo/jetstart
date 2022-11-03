@@ -11,7 +11,7 @@
     <div class="py-12">
         <x-container>
             <div class="py-12">
-                @each('cpanel.users.ability-section', $this->abilities, 'group')
+                @each('cpanel.users.ability-section', $abilities, 'group')
             </div>
         </x-container>
     </div>

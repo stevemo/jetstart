@@ -33,14 +33,47 @@ class UserAbilitiesTest extends TestCase
     /** @test */
     public function user_abilities_are_available()
     {
-        config()->set('abilities', [':ability-config:']);
+        config()->set('abilities', $this->fakeConfig());
         $user = User::factory()->abilities(['view', 'create'])->create();
-        $this->actingAs($loginUser = User::factory()->abilities(['user:update'])->create());
+        $this->actingAs(User::factory()->abilities(['user:update'])->create());
 
         $component = Livewire::test(UserAbilities::class, ['user' => $user]);
 
         $this->assertEquals(collect(['view', 'create']), $component->state);
         $this->assertTrue($user->is($component->user));
-        $this->assertEquals([':ability-config:'], $component->abilities);
+        $this->assertEquals($this->fakeConfig(), $component->abilities);
+    }
+
+    /** @test */
+    public function can_update_user_abilities()
+    {
+        config()->set('abilities', $this->fakeConfig());
+        $user = User::factory()->create();
+        $this->actingAs($loginUser = User::factory()->abilities(['user:update'])->create());
+
+        $component = Livewire::test(UserAbilities::class, ['user' => $user])
+            ->set('state', ['cpanel.view'])
+            ->call('update')
+            ->assertDispatchedBrowserEvent('notify');
+
+        $this->assertTrue($user->fresh()->ableTo('cpanel.view'));
+    }
+
+    protected function fakeConfig()
+    {
+        return [
+            'Control Panel' => [
+                'title'    => 'Control Panel',
+                'subtitle' => 'Abilities needed to interact within the control panel',
+                'rules'    => [
+                    [
+                        'title'     => 'Control Panel',
+                        'abilities' => [
+                            'cpanel.view' => 'View The Control Panel',
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 }

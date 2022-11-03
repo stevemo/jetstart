@@ -39,7 +39,7 @@
             </div>
 
             <div class="flex items-center justify-end px-4 py-3 text-right bg-gray-50 sm:px-6">
-                <x-jet-button wire:loading.attr="disabled">
+                <x-jet-button wire:click="update">
                     Save
                 </x-jet-button>
             </div>

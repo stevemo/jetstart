@@ -20,7 +20,14 @@ class UserAbilities extends Component
     {
         $this->authorize('update', $user);
         $this->user = $user;
-        $this->abilities = collect(config('abilities', []));
+        $this->abilities = config('abilities', []);
         $this->state = $this->user->abilities;
+    }
+
+    public function update()
+    {
+        $this->authorize('update', $this->user);
+        $this->user->update(['abilities' => $this->state]);
+        $this->notify('User abilities updated!');
     }
 }
