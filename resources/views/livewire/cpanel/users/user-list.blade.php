@@ -76,7 +76,7 @@
                                                             <button
                                                                 x-data
                                                                 x-tooltip="Delete"
-                                                                wire:click="$emit('user:delete', {{ $user->id }})"
+                                                                wire:click="$emit('user:suspend', {{ $user->id }})"
                                                                 type="button">
                                                                 <x-svg.trash class="w-6 h-6 text-red-500 hover:text-red-700" />
                                                             </button>
@@ -116,6 +116,6 @@
         </div>
     </div>
 
-    @livewire('cpanel.users.delete-user')
+    @livewire('cpanel.users.suspend-user')
     @livewire('cpanel.users.restore-user')
 </div>

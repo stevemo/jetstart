@@ -13,8 +13,8 @@ class UserList extends Component
     use WithPagination;
 
     protected $listeners = [
-        'user:deleted'  => 'listenerResponse',
-        'user:restored' => 'listenerResponse',
+        'user:suspended'  => 'listenerResponse',
+        'user:restored'   => 'listenerResponse',
     ];
 
     public function mount()

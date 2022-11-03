@@ -5,10 +5,10 @@ namespace Tests\Feature\Livewire\Cpanel\Users;
 use Tests\TestCase;
 use App\Models\User;
 use Livewire\Livewire;
-use App\Http\Livewire\Cpanel\Users\DeleteUser;
+use App\Http\Livewire\Cpanel\Users\SuspendUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class DeleteUserTest extends TestCase
+class SuspendUserTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,7 +19,7 @@ class DeleteUserTest extends TestCase
         $otherUser = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(DeleteUser::class)
+            ->test(SuspendUser::class)
             ->call('delete', $otherUser->id)
             ->assertForbidden();
     }
@@ -30,7 +30,7 @@ class DeleteUserTest extends TestCase
         $user = User::factory()->abilities(['user:viewAny', 'user:delete'])->create();
 
         Livewire::actingAs($user)
-            ->test(DeleteUser::class)
+            ->test(SuspendUser::class)
             ->call('delete', $user->id)
             ->assertForbidden();
 
@@ -43,7 +43,7 @@ class DeleteUserTest extends TestCase
         $user = User::factory()->admin()->create();
 
         Livewire::actingAs($user)
-            ->test(DeleteUser::class)
+            ->test(SuspendUser::class)
             ->call('delete', $user->id);
 
         $this->assertFalse($user->fresh()->trashed());
@@ -56,9 +56,10 @@ class DeleteUserTest extends TestCase
         $otherUser = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(DeleteUser::class)
+            ->test(SuspendUser::class)
             ->call('delete', $otherUser->id)
-            ->call('destroy');
+            ->call('destroy')
+            ->assertEmitted('user:suspended');
 
         $this->assertTrue($otherUser->fresh()->trashed());
     }

@@ -6,7 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class DeleteUser extends Component
+class SuspendUser extends Component
 {
     use AuthorizesRequests;
 
@@ -14,7 +14,7 @@ class DeleteUser extends Component
 
     public $show = false;
 
-    protected $listeners = ['user:delete' => 'delete'];
+    protected $listeners = ['user:suspend' => 'delete'];
 
     public function delete(User $user)
     {
@@ -35,7 +35,7 @@ class DeleteUser extends Component
 
             $this->show = false;
             $this->user = null;
-            $this->emit('user:deleted', 'User suspended!');
+            $this->emit('user:suspended', 'User suspended!');
         }
     }
 

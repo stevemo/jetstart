@@ -34,7 +34,7 @@ class RestoreUserTest extends TestCase
             ->test(RestoreUser::class)
             ->call('showModal', $otherUser->id)
             ->call('restore')
-            ->assertOk();
+            ->assertEmitted('user:restored');
 
         $this->assertFalse($otherUser->fresh()->trashed());
     }
