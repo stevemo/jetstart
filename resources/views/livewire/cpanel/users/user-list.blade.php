@@ -71,6 +71,11 @@
                                         <td class="table-td">
                                             <div class="flex space-x-2">
                                                 @if(! $user->trashed())
+                                                    @can('update', $user)
+                                                        <a href="{{ route('cpanel.users.abilities', $user) }}" >
+                                                            <x-svg.lock-closed class="w-6 h-6 text-gray-800 hover:text-gray-500" />
+                                                        </a>
+                                                    @endcan
                                                     @can('delete', $user)
                                                         @if ($user->isNot(auth()->user()))
                                                             <button

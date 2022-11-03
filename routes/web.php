@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Cpanel\Users\UserList;
+use App\Http\Livewire\Cpanel\Users\UserAbilities;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 // Control Panel Routes
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->prefix('cpanel')->name('cpanel.')->group(function () {
     Route::get('/users', UserList::class)->name('users.index');
+    Route::get('/users/abilities/{user}', UserAbilities::class)->name('users.abilities');
 });
