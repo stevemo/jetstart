@@ -1,0 +1,31 @@
+<?php
+
+namespace [testnamespace];
+
+use Tests\TestCase;
+use App\Models\User;
+use Livewire\Livewire;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class [testclass] extends TestCase
+{
+    use RefreshDatabase;
+
+    /** @test */
+    public function the_component_can_render()
+    {
+        $userWithAbility = User::factory()->abilities([])->create();
+        $userWithout = User::factory()->create();
+
+        $this->get(route())
+            ->assertRedirect('/login');
+
+        $this->actingAs($userWithout)
+            ->get(route())
+            ->assertForbidden();
+
+        $this->actingAs($userWithAbility)
+            ->get(route())
+            ->assertOk();
+    }
+}

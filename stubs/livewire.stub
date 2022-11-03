@@ -1,0 +1,21 @@
+<?php
+
+namespace [namespace];
+
+use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+class [class] extends Component
+{
+    use AuthorizesRequests;
+
+    public function mount()
+    {
+        //$this->authorize();
+    }
+
+    public function render()
+    {
+        return view('[view]');
+    }
+}
