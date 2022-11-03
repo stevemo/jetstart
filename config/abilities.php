@@ -8,17 +8,17 @@ return [
             [
                 'title'     => 'Control Panel',
                 'abilities' => [
-                    'cpanel.view' => 'View The Control Panel',
+                    'cpanel:view' => 'View The Control Panel',
                 ],
             ],
             [
                 'title'     => 'Users',
                 'abilities' => [
-                    'user.viewAny'      => 'View all users',
-                    'user.create'       => 'Create new user',
-                    'user.update'       => 'Update user',
-                    'user.delete'       => 'Suspend user',
-                    'user.restore'      => 'Restore user',
+                    'user:viewAny'      => 'View all users',
+                    'user:create'       => 'Create new user',
+                    'user:update'       => 'Update user',
+                    'user:delete'       => 'Suspend user',
+                    'user:restore'      => 'Restore user',
                 ],
             ],
         ],
