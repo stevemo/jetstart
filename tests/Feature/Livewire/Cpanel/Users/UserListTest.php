@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire\Cpanel\User;
+namespace Tests\Feature\Livewire\Cpanel\Users;
 
 use Tests\TestCase;
 use App\Models\User;
