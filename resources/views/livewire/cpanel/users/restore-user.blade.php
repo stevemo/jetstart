@@ -13,7 +13,7 @@
                {{ __('Nevermind') }}
            </x-jet-secondary-button>
 
-           <x-danger-button class="ml-2" wire:click="destroy" wire:loading.attr="disabled">
+           <x-danger-button class="ml-2" wire:click="restore" wire:loading.attr="disabled">
                Restore Account
            </x-danger-button>
        </x-slot>

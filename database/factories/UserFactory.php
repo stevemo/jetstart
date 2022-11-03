@@ -70,6 +70,20 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the model's should be deleted.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function trashed()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'deleted_at' => now(),
+            ];
+        });
+    }
+
+    /**
      * Indicate that the model's abilities should should have the following ability.
      *
      * @return static

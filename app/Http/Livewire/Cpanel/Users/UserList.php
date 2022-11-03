@@ -27,7 +27,7 @@ class UserList extends Component
         return User::withTrashed()->paginate();
     }
 
-    protected function listenerResponse($message)
+    public function listenerResponse($message)
     {
         $this->notify($message);
     }
